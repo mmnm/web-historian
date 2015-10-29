@@ -30,25 +30,31 @@ exports.readListOfUrls = function() {
 
 exports.isUrlInList = function(file) {
   filePath = this.paths.list;
-  console.log("33: FilePath:", this.paths.list);
+  //console.log("33: FilePath:", this.paths.list);
   var data;
 
   fs.readFile(filePath, 'UTF8', function(err, content){
-    console.log("37ReadFile");
+
     if(err){
         console.log("37throwErr");
       throw err;
     } else {
 
-      console.log("41Content", content);
-      data = content.split(',');
+       console.log("41Compare", content.indexOf('google.com'));
+       console.log("44content", content);
+       console.log("44File", file);
+       console.log("44type", typeof content, typeof file);
+      // data = content.split('\n');
+      //console.log("41AfterSplitContent", content);
 
-      if(data.indexOf(file) !== -1) {
+      if(content.indexOf(file) === -1) {
+        console.log("51: Not found");
         return true;
       } else {
+        console.log("Found");
         return false;
       }
-      console.log("41", data);
+
     }
   });
 

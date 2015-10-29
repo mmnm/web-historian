@@ -43,20 +43,25 @@ exports.handleRequest = function (req, res) {
     } else {
       sendResponse(res, null, 404); 
     }
-  } else if(req.method === "POST") {
+  } 
+
+ 
+  if(req.method === "POST") {
     //POST
+
     console.log("POST");
 
     var data = '';
     req.on('data', function(chunk) {
          data += chunk;
       });
-    req.on('end',function(){
+    req.on('end',function(){ 
       // console.log("54", archive.paths.list); 
-      data = data.substr(4) + ',';
-      archive.isUrlInList(data);
-      if(archive.isUrlInList(data)){
-        console.log("58");
+      data = data.substr(4) + '\n';
+      console.log("typeof ", typeof archive.isUrlInList);
+      console.log('62data:', data)
+      if( archive.isUrlInList(data) === false){
+        console.log("58Yess ");
         fs.appendFile(archive.paths.list, data, function(err) {
           if(err){
             sendResponse(res, null, 400);

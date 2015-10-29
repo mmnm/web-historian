@@ -103,7 +103,7 @@ describe("archive helpers", function(){
       });
 
       archive.isUrlInList("gibberish", function (is) {
-        expect(!is);
+        expect(!is); 
         if (++counter == total) { done() }
       });
     });
